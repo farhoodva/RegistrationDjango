@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+body{
+    margin-top: 8%;
+    font-family: Shabnam, sans-serif;
+}
+@font-face {
+    font-family:Shabnam;
+    src: url('C:\myfolder\Shabnam.ttf');
+}
+
+#table {
+    direction: rtl;
+    margin: 0 auto 20px;
+    width: 80%;
+    min-height: 600px;
+    row-gap: 10px;
+    border-collapse: collapse;
+    overflow-x: auto;
+    box-shadow: 1px 1px 15px lightgray;
+    {#font-family: Shabnam, "Segoe UI", sans-serif;#}
+}
+
+#table td{
+    border-bottom:1px solid #ddd;
+    text-align: center;
+    padding: 8px;
+    margin:0;
+
+
+}
+#img {
+    display: inline-block;
+    margin-left: 33vw;
+    border: 2px solid black;
+    box-sizing: border-box;
+    height: 250px;
+
+}
+
+#table th{
+    height: 61px;
+    font-size:  15px   ;
+    border-bottom:1px solid #ddd;
+    text-align: center;
+    padding: 8px;
+    background-color: whitesmoke;
+
+}
+
+
+#table  tr:nth-child(even){
+    background-color: floralwhite;
+
+}
+
+#table tr:hover{
+    background-color: darkgrey;
+}
+
+#td1{
+    background-color: whitesmoke;
+}
+
+    </style>
+</head>
+
+<body>
+
+
+<div id="card-form" class="card shadow" >
+
+
+        <div >
+        <pdf:language name="persian"/>
+            <table id="table" >
+				<tr >
+                    <th>نام خانوادگی</th>
+                    <th >نام</th>
+                    <th >کارت هوشمند</th>
+                    <th  >کد ملی</th>
+                    <th id="td1" class="font-weight-bold"  >ردیف</th>
+                </tr>
+                {% for driver in drivers %}
+                <tr>
+
+                    <td>{{ driver.family }}</td>
+                    <td>{{ driver.name }}</td>
+                    <td>{{ driver.smart_card_number }}</td>
+                    <td>{{ driver.national_id }}</td>
+                    <td >{{ forloop.counter}}</td>
+
+                </tr>
+
+                {% endfor %}
+			</table>
+        </div>
+ </div>
+</body>
+</html>

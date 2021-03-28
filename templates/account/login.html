@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+
+{% block content %}
+
+
+ <div id="head" class="card-header shadow">
+        <h1>ورود</h1>
+    </div>
+    <div id="card-form" class="card shadow">
+        <div class="card ">
+
+        <form class="login" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+
+{#            {{ form }}#}
+        <span>نام کاربری</span>
+            <div class="mb-3 mt-2">
+{#            {{ form.login }}#}
+                <input class="form-control" type="text" name="login" placeholder="نام کاربری" autocomplete="username" maxlength="100" required="" id="id_login">
+            </div>
+
+            <span style="display: inline-block">رمز عبور</span>
+            <div class="mb-3 mt-2">
+{#             {{ form.password }}#}
+                <input class="form-control" type="password" name="password" placeholder="رمز عبور" autocomplete="current-password" maxlength="100" required="" id="id_password">
+            </div>
+{#            <ul class="errorlist">#}
+{#          {% if form.non_field_errors %}#}
+{#            <li>{{ form.non_field_errors }}</li>#}
+{#          {% endif %}#}
+{#          {% for field in form %}#}
+{#            {% if field.errors %}#}
+{#              <li>#}
+{#                {{ field.label }}#}
+{#                <ul class="errorlist">#}
+{#                  {% for error in field.errors %}#}
+{#                    <li class="red-text">{{ error }}</li>#}
+{#                  {% endfor %}#}
+{#                </ul>#}
+{#              </li>#}
+{#            {% endif %}#}
+{#          {% endfor %}#}
+{#        </ul>#}
+            <label  for="id_remember" class="active ml-2 mb-3">  مرا به یاد داشته باش  </label>
+            <input  type="checkbox" name="remember" id="id_remember">
+
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+
+            <div class="input-group">
+            <button type="submit" class="btn btn-primary rounded ">ورود</button>
+            <a type="button" class="btn btn-default " href="{% url 'account_reset_password' %}">بازیابی پسورد</a>
+            </div>
+        </form>
+    </div>
+    </div>
+{% endblock %}

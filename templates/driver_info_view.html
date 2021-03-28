@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+
+
+#head {
+    margin:auto;
+    text-align:center ;
+    background-color: floralwhite;
+    text-shadow:2px 2px 5px darkgrey;
+    padding:75px 50px ;
+    max-width: 30vw;
+    min-width: 500px;
+    border-radius: 8px;
+    font-family:  "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+#card-form {
+    max-width: 30vw;
+    margin: auto;
+    padding: 40px 50px 25px;
+    border-radius: 8px;
+    align-content: start;
+    text-align: right;
+    min-width: 500px;
+}
+#input{
+    margin:5% auto;
+    align-items: center;
+}
+
+#but1,#but2,#but3 {
+
+    padding: 13px 55px;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    box-sizing: border-box;
+}
+
+
+
+.form-row div, .form-group div{
+    padding: 28px 20px;
+    direction: rtl;
+}
+
+#table {
+
+    margin:0 auto 1vw;
+    width: 80%;
+    height: 300px;
+    border-collapse: collapse;
+    overflow-x:auto;
+    box-shadow:1px 1px 15px lightgray;
+    font-family:"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+#table td, #table th {
+    {#border: 1px solid #ddd;#}
+    padding: 8px;
+    margin:0
+
+}
+
+
+#table th{
+    font-size:  16px   ;
+    background-color: darkcyan;
+    text-align: center;
+
+}
+
+#table td{
+    width: 1%;
+    line-height: 35px;
+}
+
+
+
+#table  tr:nth-child(even){
+    background-color: floralwhite;
+
+}
+
+#table tr:hover{
+    background-color: darkgrey;
+}
+
+
+</style>
+
+
+
+    <div id="head" class="card-header shadow"  >
+        <h1  >سامانه ثبت نام رانندگان</h1>
+            <h2>(نمایش و ویرایش)</h2>
+    </div>
+    <div id="card-form" class="card shadow" >
+        <form  method="post" action={% url 'registration:info_view' %} >
+            {% csrf_token %}
+
+            <input class="form-control col-6 mr-2 d-sm-inline-block" style="direction: rtl;" type="number" placeholder="کد ملی" name="national_id">
+            <div id="input">
+            <input id="but1" class="btn btn-red rounded "  type="submit" value="جستجو">
+            <a  id="but2" class="btn btn-primary rounded" href={% url 'registration:registration' %} >بازگشت</a>
+
+            </div>
+        </form>
+        {% if table_display %}
+        <div class="datatable" data-pagination="false" data-striped="true" data-borderless="true" data-loader-class="bg-success" data-max-height="320px" data-color="light-blue" data-border-color="success">
+            <table id="table" >
+				<tr>
+                    <td class="font-weight-bold col-3" >کد ملی</td>
+                    <td>{{ driver.national_id }}</td>
+
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bold  ">کارت هوشمند</td>
+                    <td>{{ driver.smart_card_number }}</td>
+
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bold  ">تلفن همراه</td>
+                   <td>{{ driver.cellnumber }}</td>
+
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bold">ایمیل</td>
+                     <td>{{ driver.email }}</td>
+
+                </tr>
+
+
+                <tr>
+                    <td class="font-weight-bold">نام</td>
+                    <td>{{ driver.name }}</td>
+
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bold">نام خانوادگی</td>
+                    <td>{{ driver.family }}</td>
+
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bold">استان</td>
+                    <td>{{ driver.state }}</td>
+
+                </tr>
+
+                <tr>
+                    <td class="font-weight-bold">شهر</td>
+                    <td>{{ driver.city }}</td>
+
+                </tr>
+
+                <tr>
+
+                   <td colspan="2"> <a id="but3" class="btn btn-red rounded " href={{driver.get_driver_info_update_url}}>ویرایش</a></td>
+                </tr>
+
+			</table>
+
+        </div>
+        {% endif %}
+
+
+    </div>
+
+
+{% endblock %}

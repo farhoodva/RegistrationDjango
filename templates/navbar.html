@@ -1,0 +1,73 @@
+{% load static %}
+
+{#navbar bootstarp#}
+
+{#<div class="jumbotron tempting-azure-gradient " style="margin-bottom: 0;padding:25px; text-align: right">#}
+{#    <h2>شرکت خدمات بیمه ای پیام رسانان آتیه روشن </h2>#}
+{#</div>#}
+
+{#<div >#}
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow sticky-top mb-4">
+    <div>
+ <img class="img-fluid  mr-md-5 ml-md-5 mr-sm-2"  src={% static 'img/II2.png' %} alt="" height="95" width="95">
+    </div>
+    <button class="navbar-toggler white border  " data-toggle="collapse" data-target="#collapse_target">
+        <span class="navbar-toggler-icon "></span>
+    </button>
+
+{#    bootstrap collpase#}
+    <div class="collapse  navbar-collapse text-right "  id="collapse_target">
+
+
+
+    <ul class="navbar-nav mb-0 mt-5">
+
+        <li class="nav-item">
+            <a class="nav-link ml-3" href={% url "registration:registration" %}>
+                <img src={% static 'img/icons/signup.png' %} alt="">
+                ثبت نام
+
+            </a>
+        </li>
+        <div class="dropdown-divider black"></div>
+        <li class="nav-item">
+            <a class="nav-link ml-3" href={% url "registration:info_view" %}>
+              <img src={% static 'img/icons/search.png' %} alt="">
+                جستجوی کد ملی
+            </a>
+        </li>
+         <div class="dropdown-divider black"></div>
+        <li class="nav-item">
+            <a class="nav-link ml-3" href={% url "registration:registration" %}>
+                <img src={% static 'img/icons/contact_us.png' %} alt="">
+                تماس با ما
+            </a>
+        </li>
+        <div class="dropdown-divider "></div>
+        {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link ml-3" href={% url 'registration:list_view' %}>
+                    <img src={% static 'img/icons/list.png' %} alt="">
+                    لیست اسامی
+                </a>
+            </li>
+            <div class="dropdown-divider black"></div>
+            <li class="nav-item">
+                <a class="nav-link ml-3" href={% url 'account_logout' %}>
+                    <img  src={% static 'img/icons/logout2.png' %}  >
+                    خروج
+                </a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link ml-3" href={% url 'account_login' %}>
+                    <img src={% static 'img/icons/login2.png' %}>
+                    ورود
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+        </div>
+</nav>
+
+{#</div>#}

@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <style>
+
+
+
+
+#head {
+    margin: auto;
+    text-align: center;
+    background-color: floralwhite;
+    padding: 75px 50px;
+    max-width: 30vw;
+    min-width: 400px;
+    text-shadow:2px 2px 5px darkgrey;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+
+}
+
+#card-form {
+
+    max-width: 30vw;
+    min-width: 400px;
+    max-height: max-content;
+    margin: auto;
+    padding: 20px 10px;
+    border-radius: 8px;
+    text-align: right;
+}
+
+.card {
+    display: block;
+    direction: rtl;
+    max-height: max-content;
+    padding: 20px 50px;
+    margin: auto;
+    max-width: 400px;
+    min-width: 70%;
+}
+
+#but1 {
+
+    padding: 13px 55px;
+
+}
+
+
+</style>
+
+
+
+    <div id="head" class="card-header shadow">
+        <h1>سامانه ثبت نام رانندگان</h1>
+    </div>
+    <div id="card-form" class="card shadow">
+        <div class="card form-group ">
+        <form action="" method="post" id="personForm"  data-cities-url= {% url 'registration:load_cities' %} >
+            {% csrf_token %}
+
+                <span class="form col-md-6 mb-3 mt-0">
+
+                    {{ form.national_id }}
+                    <span class="red-text mb-0 pb-0">{{ form.national_id.errors }}</span>
+
+                </span>
+
+                <span class="form col-md-6 mb-3  ">
+
+                {{ form.smart_card_number }}
+                <span class="red-text mb-0 pb-0">{{ form.smart_card_number.errors }}</span>
+
+                </span>
+
+                <span class="form col-md-6 mb-3">
+
+                    {{ form.name }}
+                    <span class="red-text mb-0 pb-0">{{ form.name.errors }}</span>
+
+                </span>
+
+                <span class="form col-md-6 mb-3">
+
+                    {{ form.family }}
+                    <span class="red-text mb-0 pb-0">{{ form.family.errors }}</span>
+
+                </span>
+
+                <span class="form col-md-6 mb-3">
+
+                {{ form.cellnumber }}
+                <span class="red-text mb-0 pb-0">{{ form.cellnumber.errors }}</span>
+
+                </span>
+
+                <span  class="form col-md-6 mb-3 ">
+
+                    {{ form.email }}
+                    <span class="red-text mb-0 pb-0">{{ form.email.errors }}</span>
+
+                </span>
+
+
+                <span class="form col-md-6 mb-3">
+
+                    {{ form.state }}
+                    <span class="red-text mb-0 pb-0">{{ form.state.errors }}</span>
+
+                </span>
+
+                <span  class="form col-md-6  ">
+
+                    {{ form.city }}
+                    <span class="red-text mb-0 pb-0">{{ form.city.errors }}</span>
+
+                </span>
+
+
+                <div id="input">
+                    <input id="but1" class="btn btn-primary rounded " type="submit" name="submit"
+                           value="ثبت نام">
+
+                </div>
+
+        </form>
+
+
+    </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        <script>
+            $('#id_state').change(function () {
+                var url = $('#personForm').attr('data-cities-url');
+                var state_id = $(this).val(); //or $('#id_state').val() this.value// gets the selected state ID from html input
+
+                $.ajax({    //initialize an AJAX request
+                    url: url, //set the url of the request
+                    data: {
+                        'state': state_id  //add the state  to request values
+                    },
+                    success: function (data,ResponseText,status,xhr) { // data is returned as result of load cities function
+                        {#console.log(data)#}
+                        {#console.log(ResponseText)#}
+                        {#console.log(status)#}
+                        {#console.log(xhr)#}
+                        $("#id_city").html(data) //load the data that came form server into html
+                    }
+                });
+
+
+            });
+
+        </script>
+    </div>
+
+
+{% endblock %}

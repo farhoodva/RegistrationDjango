@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style>
+
+
+        #head {
+            margin: auto;
+            text-align: center;
+            background-color: floralwhite;
+            text-shadow:2px 2px 5px darkgrey;
+            padding: 75px 50px;
+            max-width: 30vw;
+            min-width: 400px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+        }
+
+        #card-form {
+            max-width: 30vw;
+            min-width: 400px;
+            margin: auto;
+            padding: 20px 10px;
+            border-radius: 8px;
+            text-align: right;
+        }
+
+        .card {
+            display: block;
+            direction: rtl;
+            padding: 20px 50px;
+            margin: auto;
+            max-width: 400px;
+            min-width: 70%;
+        }
+
+        #input {
+            margin: 5% 0;
+            width: 70%;
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+
+        }
+        #2{
+            display: none;
+        }
+
+        #but1, #but2 {
+            margin: auto;
+            padding: 13px 55px;
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            box-sizing: border-box;
+        }
+
+
+
+    </style>
+
+
+
+    <div id="head" class="card-header shadow">
+        <h1>سامانه ثبت نام رانندگان</h1>
+        <h2>(تایید)</h2>
+    </div>
+    <div id="card-form" class="card shadow">
+
+        <form method="POST" action={% url 'registration:activate' token   %}>
+            {% csrf_token %}
+            <div id="2" hidden>
+                {{ from.as_table }}
+                </div>
+
+            <div class="card ">
+
+
+
+                    <input id="input" class="form-control pt-2 pb-2" type="number" placeholder="کد ارسال شده را وارد نمایید" name="email_token">
+
+                </span>
+               <span>
+                     <button type="submit" id="but1" class="btn btn-red rounded">تایید</button>
+               </span>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

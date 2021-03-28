@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <style>
+        #table{
+            margin: auto;
+            max-width: 600px;
+        }
+
+        #table td {
+            width: 10%;
+            line-height: 50px;
+            {#border-bottom:1px   grey  solid;#}
+
+            padding: 0 5px
+
+        }
+
+        #table tr:nth-child(even) {
+            background-color: floralwhite;
+
+        }
+
+
+
+
+        .form-row div, .form-group div {
+            direction: rtl;
+        }
+
+
+        #card-form {
+
+            margin: auto;
+            padding: 20px 15px;
+            border-radius: 8px;
+            text-align: right;
+            {#width: 65vw;#}
+            box-sizing: border-box;
+        }
+
+        #head {
+            margin: auto;
+            text-align: center;
+            background-color: floralwhite;
+            width: 80vw;
+            border-radius: 8px;
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+
+        #but1, #but2 {
+            box-sizing: border-box;
+            padding: 13px 55px;
+        }
+
+    </style>
+    {% if form.non_field_errors %}
+        <div class="card alert alert-dismissible alert-danger shadow text-right mb-3 ">
+        {{ form.non_field_errors }}
+        <button type="button" class="close " data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="red-text" >&times;</span>
+        </button>
+        </div>
+  {% endif %}
+    {% for field in form %}
+        {% if field.errors %}
+            <div class="card alert btn-danger alert-dismissible shadow text-right mt-0 mb-3 container">
+              {% for error in field.errors %}
+               <span>{{ error }}</span>
+                   <button  type="button" class="close  flex-center"   data-dismiss="alert" aria-label="Close" >
+                   <span aria-hidden="true" class="red-text" >&times;</span>
+                   </button>
+              {% endfor %}
+            </div>
+
+        {% endif %}
+    {% endfor %}
+
+    <div id="head" class="card-header shadow"  >
+        <h1  >سامانه ثبت نام رانندگان</h1>
+            <h2>(ویرایش)</h2>
+    </div>
+    <div id="card-form" class="card shadow">
+        <div class="datatable" data-pagination="false" data-striped="true" data-borderless="true"
+             data-loader-class="bg-success" data-max-height="320px" data-color="light-blue" data-border-color="success">
+            <form action="" method="post">
+                {% csrf_token %}
+                <table class=" shadow  " id="table">
+                    <tr>
+                        <td class=" font-weight-bold  ">کارت هوشمند</td>
+                        <td>{{ form.smart_card_number }}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="font-weight-bold  ">تلفن همراه</td>
+                        <td>{{ form.cellnumber }}</td>
+
+
+                    </tr>
+
+                    <tr >
+                        <td class="font-weight-bold ">ایمیل</td>
+                        <td>{{ form.email }}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="font-weight-bold">نام</td>
+                        <td>{{ form.name }}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="font-weight-bold">نام خانوادگی</td>
+                        <td>{{ form.family }}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="font-weight-bold">استان</td>
+                        <td>{{ form.state }}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="font-weight-bold">شهر</td>
+                        <td>{{ form.city }}</td>
+
+                    </tr>
+
+
+                </table>
+
+                <div id="input">
+                          <input id="but1" class="btn btn-red rounded " type="submit" name="submit"
+                           value="ویرایش">
+
+                    <a id="but2" class="btn btn-primary rounded" href={% url 'registration:info_view' %}> بازگشت </a>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

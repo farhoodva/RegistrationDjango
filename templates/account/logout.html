@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+
+    <div id="head" class="card-header shadow">
+        <h1>خروج</h1>
+    </div>
+    <div id="card-form" class="card shadow">
+        <div class="card ">
+
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+{#                {% if redirect_field_value %}#}
+{#                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>#}
+{#                {% endif %}#}
+                <h4 class="my-xl-5">آیا مایل به خروج هستید؟</h4>
+                <div class="input-group">
+                <button  class=" btn btn-red rounded px-4 " type="submit">&nbsp&nbspبعله&nbsp&nbsp&nbsp</button>
+                <a  class="btn btn-primary rounded px-4" href='/'>بازگشت</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+
+
+
+#head {
+    margin:auto;
+    text-align:center ;
+    background-color: floralwhite;
+    text-shadow:2px 2px 5px darkgrey;
+    padding:75px 50px ;
+    max-width: 30vw;
+    min-width: 500px;
+    border-radius: 8px;
+
+}
+
+#card-form {
+    max-width: 30vw;
+    margin: auto;
+    padding: 40px 50px 10px;
+    border-radius: 8px;
+    align-content: start;
+    text-align: right;
+    min-width: 500px;
+}
+#input{
+    margin:5% auto;
+    align-items: center;
+}
+
+#but1,#but2 {
+    margin-top: 0;
+    padding: 10px 30px;
+    box-sizing: border-box;
+}
+#but1 {
+
+    padding: 10px 35px;
+
+}
+
+
+
+#table {
+    direction: rtl;
+    margin:0 auto 20px;
+    width: 80%;
+    min-height:600px;
+    row-gap: 10px;
+    border-collapse: collapse;
+    overflow-x:auto;
+    box-shadow:1px 1px 15px lightgray;
+}
+
+#table td{
+    border-bottom:1px solid #ddd;
+    text-align: center;
+    padding: 8px;
+    margin:0;
+
+
+}
+
+
+#table th{
+    height: 61px;
+    font-size:  15px   ;
+    border-bottom:1px solid #ddd;
+    text-align: center;
+    padding: 8px;
+    background-color: whitesmoke;
+
+}
+
+
+#table  tr:nth-child(even){
+    background-color: floralwhite;
+
+}
+
+#table tr:hover{
+    background-color: darkgrey;
+}
+
+#td1{
+    background-color: whitesmoke;
+}
+
+</style>
+
+
+
+    <div id="head" class="card-header shadow"  >
+        <h1  >سامانه ثبت نام رانندگان</h1>
+            <h2>(لیست رانندگان)</h2>
+    </div>
+    <div id="card-form" class="card shadow" >
+
+
+
+
+        <div >
+            <table id="table" >
+				<tr >
+                    <th class="font-weight-bold"  >ردیف</th>
+                    <th  >کد ملی</th>
+                    <th >کارت هوشمند</th>
+                    <th >نام</th>
+                    <th>نام خانوادگی</th>
+                </tr>
+                {% for driver in drivers %}
+                <tr>
+                    <td id="td1">{{ forloop.counter}}</td>
+                    <td>{{ driver.national_id }}</td>
+                    <td>{{ driver.smart_card_number }}</td>
+                    <td>{{ driver.name }}</td>
+                    <td>{{ driver.family }}</td>
+                </tr>
+                {% endfor %}
+			</table>
+   {% if is_paginated %}
+            <nav class="d-flex justify-content-center wow fadeIn ">
+                <ul class="pagination primary mb-0">
+
+                    <!--Arrow left-->
+                    {% if page_obj.has_previous %}
+                    <li class="page-item ">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo; </span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item active">
+                        <a class="page-link">
+                            <span >{{ page_obj.number }}</span>
+                        </a>
+                    </li>
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item ">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+
+            <div id="input">
+            <a  id="but2" class="btn btn-dark-green rounded" href={% url 'registration:export_excel' %} >Excel دانلود</a>
+            <a  id="but1" class="btn btn-danger rounded" href={% url 'registration:list_view_pdf' %} > PDF دانلود </a>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+{% endblock %}
